@@ -27,33 +27,40 @@ class PokemonLINQLab
             new Pokemon { Id = 8, Name = "Snorlax", Type = "Normal", Level = 30, Attack = 110 }
         };
 
+        // Find Pokemon ready to evolve
         var readyToEvolve = from p in pokemons
                             where p.Level >= 16
                             orderby p.Level
                             select p;
 
+        // Display Pokemon ready to evolve
         Console.WriteLine("Pokemon Ready to Evolve:");
 
+        // Print each Pokemon ready to evolve
         foreach (var p in readyToEvolve)
         {
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Level: {p.Level}");
         }
 
+        // Find Pokemon with Attack of 50 or higher
         var strongPokemon = (from p in pokemons
                              where p.Attack >= 50
                              select p).ToList();
 
+        // Sort strong Pokemon alphabetically by name
         var sortedPokemon = (from p in strongPokemon
                              orderby p.Name
                              select p).ToList();
 
         Console.WriteLine("\nStrong Pokemon (Attack 50 or Higher), Alphabetical Order:");
 
+        // Print strong Pokemon and their Attack stats
         foreach (var p in sortedPokemon)
         {
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Attack: {p.Attack}");
         }
 
+        // Find Water Pokemon and sort by Level from highest to lowest
         var waterPokemon = (from p in pokemons
                             where p.Type == "Water"
                             orderby p.Level descending
@@ -61,6 +68,7 @@ class PokemonLINQLab
 
         Console.WriteLine("\nWater Pokemon (Highest Level First):");
 
+        // Print Water Pokemon and their Levels
         foreach (var p in waterPokemon)
         {
             Console.WriteLine($"Name: {p.Name}, Type: {p.Type}, Level: {p.Level}");
